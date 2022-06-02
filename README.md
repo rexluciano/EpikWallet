@@ -33,7 +33,7 @@
 #### Initialize the EpikApp
 The most important things you need before all Epik API calls.
 
->put in onCreate method and must be set it after setContentView
+>put in onCreate method and must be set it after super.onCreate()
 
 ```
 EpikApp.initializeApp(this, YOUR_TOKEN_HERE);

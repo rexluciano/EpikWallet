@@ -10,7 +10,7 @@
 
 ## EpikWallet API Implementation for Android:
 
-### Add library to your root gradle project.
+### Add it in your root build.gradle at the end of repositories:
 
 ```
 	allprojects {
@@ -21,7 +21,7 @@
 	}
 ```
 
-### Add library
+### Add the dependency
 
 ```
 	dependencies {

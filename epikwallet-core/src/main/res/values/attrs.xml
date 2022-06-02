@@ -1,0 +1,5 @@
+<resources>
+  <declare-styleable name="EpikPayButton">
+      <attr name="enableLightMode" format="boolean" />
+  </declare-styleable>
+</resources>

@@ -1,0 +1,50 @@
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+	<LinearLayout
+		android:id="@+id/epikButton"
+		android:layout_width="match_parent"
+		android:layout_height="45dp"
+		android:layout_marginLeft="16dp"
+		android:layout_marginTop="8dp"
+		android:layout_marginRight="16dp"
+		android:layout_marginBottom="16dp"
+		android:padding="8dp"
+		android:background="#2B323C"
+		android:gravity="center_horizontal|center_vertical"
+		android:orientation="horizontal">
+		<com.google.android.material.progressindicator.CircularProgressIndicator
+			android:id="@+id/progressbar1"
+			android:layout_width="16dp"
+			android:layout_height="16dp"
+			android:orientation="horizontal"
+			android:indeterminate="true"
+			style="Widget.MaterialComponents.CircularProgressIndicator.Small"
+			app:indicatorColor="#FFFFFF"
+			app:indicatorSize="25dp"
+			app:trackCornerRadius="10dp"
+			app:trackThickness="3dp"
+			android:visibility="visible" />
+		<ImageView
+			android:id="@+id/epikIcon"
+			android:focusable="false"
+			android:layout_width="23dp"
+			android:layout_height="23dp"
+			android:src="@drawable/epik_wallet"
+			android:scaleType="fitCenter"
+            android:visibility="gone"
+			app:tint="@android:color/white" />
+		<TextView
+			android:id="@+id/textview2"
+			android:focusable="false"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Buy with Epik"
+			android:textSize="14sp"
+            android:visibility="gone"
+			android:textColor="#FFFFFF" />
+	</LinearLayout>    
+</RelativeLayout>

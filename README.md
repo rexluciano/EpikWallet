@@ -25,7 +25,7 @@
 
 ```
 	dependencies {
-	        implementation 'com.github.rexllc:EpikWallet:epik-core:{latest-version}'
+	        implementation 'com.github.rexllc:EpikWallet:{latest-version}'
 	}
 ```
 

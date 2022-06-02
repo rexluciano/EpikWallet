@@ -1,37 +1,189 @@
-## Welcome to GitHub Pages
+# EpikWallet API Beta 1.0.0
+[![](https://jitpack.io/v/rexllc/EpikWallet.svg)](https://jitpack.io/#rexllc/EpikWallet)
 
-You can use the [editor on GitHub](https://github.com/rexllc/EpikWallet/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+**EpikWallet API** is a library to make your development easy. It's have neat, and good ready made views that you can implement to your app easily with bundled UI from EpikWallet
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Includes:
 
-### Markdown
+• EpikAuth Login UI, easily authenticate your user with EpikAuth Login UI.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+• EpikPay bundled with EpikPayButton, add payment method easily with EpikPay using EpikPayButton.
 
-```markdown
-Syntax highlighted code block
+## EpikWallet API Implementation for Android:
 
-# Header 1
-## Header 2
-### Header 3
+### Add it in your root build.gradle at the end of repositories:
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+### Add the dependency
 
-### Jekyll Themes
+```
+	dependencies {
+	        implementation 'com.github.rexllc:EpikWallet:v1.0.0-beta03'
+	}
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rexllc/EpikWallet/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+#### Initialize the EpikApp
+The most important things you need before all Epik API calls.
 
-### Support or Contact
+>put in onCreate method and must be set it after super.onCreate()
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+```
+EpikApp.initializeApp(this, YOUR_TOKEN_HERE);
+```
+
+#### EpikAuth without Login UI.
+
+Initialize EpikAuth instance.
+
+```
+EpikAuth mAuth = EpikAuth.getInstance(this);
+```
+
+Authenticate the user.
+
+```
+mAuth.signinUserWithEmailAndPassword(email, password, listener);
+```
+
+Create user account.
+
+Set User Name and Surname first.
+
+```
+mAuth.setName("Your Name").setSurname("Your Last Name");
+```
+
+Then call:
+
+```
+mAuth.createUserWithEmailAndPassword(email, password, listener);
+```
+
+Add the EpikAuth Listener.
+
+```
+private EpikAuthListener listener = new AuthListener() {
+      @Override
+      public void onSigninUser(String error, boolean isSuccess) {
+      //When the user successfully logged in.
+      }
+      @Override
+      public void onCreateUser(String error, boolean isSuccess) {
+      //When the user successfully creates an account.
+      }
+      @Override
+      public void onEmailVerificationSent(String error, boolean isSuccess) {
+      //On email verification sent.
+      }
+};
+```
+
+## EpikPay API
+
+An easy ready made Payment Processor API for your apps that use it's own currency called EpikCoin or in other words it's eC.
+
+Create variable.
+
+```
+private EpikPay mPay;
+```
+
+Initialize EpikPay.
+
+```
+mPay = EpikPay.getInstance(this);
+```
+
+Connect your EpikPay API key with your EpikWallet Account Number.
+
+```
+mPay.connect("API KEY", "YOUR ACCOUNT NUMBER");
+```
+
+Add EpikPayButton to your XML layout.
+
+```
+   <com.epikwallet.core.ui.button.EpikPayButton
+             android:id="@+id/mPayButton"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+```
+
+Add the listeners.
+
+```
+mPay.setEpikPayListener(new EpikPayListener() {
+       @Override
+       public void onConnectionSuccess() {}
+       @Override
+       public void onConnectionFailed(Cause cause) {}
+       @Override
+       public void onPurchasedSuccess() {}
+       @Override
+       public void onPurchasedFailed(Cause cause) {}
+});
+```
+
+Add Item.
+
+```
+mPayButton.setItemName("Name of Item");
+mPayButton.setItemValue(0);
+```
+
+Custom EpikPay method without a Button UI.
+
+```
+//onClick
+mPay.setName("Name of Item").setValue(0).launch();
+```
+
+## EpikAuth UI
+
+Add authentication to your app with ready made UI's.
+
+
+Authenticate the user easily.
+
+```
+EpikAuthUI.getInstance().signinWithEpik()
+   .addOnCompleteListener(new EpikAuthCompleteListener() {
+        @Override
+        public void onCompleted(String error, boolean isSuccess) {
+        //When user successfully logged in.
+    }
+});
+```
+
+To logout the user.
+
+```
+EpikAuth.getInstance(this).logout();
+```
+
+## Wallet API
+
+Under development API that you can use for now.
+
+Initialize the Wallet.
+
+```
+private EpikWallet mWallet;
+
+//onCreate method
+mWallet = EpikWallet.getInstance(this);
+mWallet.init(); //This will make calls to EpikWallet database to retrieve the user wallet credits.
+
+//To get balance.
+String mBalance = mWallet.getBalance();
+```
+
+*This library is under development and may break your project. Use it only at your own risk.*

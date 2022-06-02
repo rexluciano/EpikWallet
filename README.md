@@ -1,4 +1,5 @@
 # EpikWallet API Beta 1.0.0
+[![](https://jitpack.io/v/rexllc/EpikWallet.svg)](https://jitpack.io/#rexllc/EpikWallet)
 
 **EpikWallet API** is a library to make your development easy. It's have neat, and good ready made views that you can implement to your app easily with bundled UI from EpikWallet
 

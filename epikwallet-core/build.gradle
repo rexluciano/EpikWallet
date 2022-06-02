@@ -16,7 +16,6 @@ android {
 
     buildTypes {
         release {
-            shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -47,7 +46,7 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            relase(MavenPublication) {
+            release(MavenPublication) {
                 from components.release
                 groupId = 'com.epikwallet'
                 artifactId = 'epik-core'
